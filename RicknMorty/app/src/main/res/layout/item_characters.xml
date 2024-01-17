@@ -57,6 +57,18 @@
             android:textSize="16sp"
             android:text="@string/character_s_status"/>
 
+        <ImageButton
+            android:id="@+id/btn_favourite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:backgroundTint="@color/material_on_primary_disabled"
+            android:visibility="gone"
+            android:src="@drawable/baseline_favorite_24"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>

@@ -1,5 +1,6 @@
 package com.example.ricknmorty.ui.home
 
+import android.app.Application
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -28,7 +29,7 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var adapter: CharacterAdapter
-
+    private val application = Application()
     private val homeViewModel by viewModels<HomeViewModel> {
         ViewModelFactory.getInstance(requireContext())
     }

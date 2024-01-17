@@ -1,5 +1,6 @@
 package com.example.ricknmorty.ui.search
 
+import android.app.Application
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log

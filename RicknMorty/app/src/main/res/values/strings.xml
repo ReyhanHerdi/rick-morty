@@ -18,4 +18,5 @@
     <string name="character_s_origin">Character\'s Origin</string>
     <string name="location">Location</string>
     <string name="character_s_location">Character\'s Location</string>
+    <string name="fab">fab</string>
 </resources>
