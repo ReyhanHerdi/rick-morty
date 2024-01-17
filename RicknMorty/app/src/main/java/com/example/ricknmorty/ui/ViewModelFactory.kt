@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.ricknmorty.data.repository.CharacterRepository
 import com.example.ricknmorty.di.Injection
 import com.example.ricknmorty.ui.detail.DetailViewModel
+import com.example.ricknmorty.ui.favorites.FavoritesViewModel
 import com.example.ricknmorty.ui.home.HomeViewModel
 import com.example.ricknmorty.ui.search.SearchViewModel
 
@@ -21,6 +22,9 @@ class ViewModelFactory(private val repository: CharacterRepository) : ViewModelP
             }
             modelClass.isAssignableFrom(DetailViewModel::class.java) -> {
                 DetailViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(FavoritesViewModel::class.java) -> {
+                FavoritesViewModel(repository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
