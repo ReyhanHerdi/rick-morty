@@ -46,20 +46,24 @@ class SearchFragment : Fragment() {
         return root
     }
 
-    private suspend fun getData(page: String, name: String) {
+    private fun getData(page: String, name: String) {
         try {
+            isLoading(true)
             searchViewModel.getCharacterByName(page, name)
                 .enqueue(object : Callback<CharactersResponse> {
                     override fun onResponse(
                         call: Call<CharactersResponse>,
                         response: Response<CharactersResponse>,
                     ) {
+                        val responseBody = response.body()
                         if (response.isSuccessful) {
-                            val responseBody = response.body()
                             setAdapter(responseBody?.results)
                             binding.tvEmpty.visibility = View.GONE
+                            isLoading(false)
                         } else {
+                            setAdapter(responseBody?.results)
                             binding.tvEmpty.visibility = View.VISIBLE
+                            isLoading(false)
                         }
                     }
 
@@ -104,6 +108,14 @@ class SearchFragment : Fragment() {
                     }
                     false
                 }
+        }
+    }
+
+    private fun isLoading(isLoading: Boolean) {
+        if (isLoading) {
+            binding.progressBar.visibility = View.VISIBLE
+        } else {
+            binding.progressBar.visibility = View.GONE
         }
     }
 

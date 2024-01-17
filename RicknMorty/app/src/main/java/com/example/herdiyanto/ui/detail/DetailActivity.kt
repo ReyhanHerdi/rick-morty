@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.viewModelScope
 import com.bumptech.glide.Glide
@@ -35,8 +36,9 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
-    suspend fun getData() {
+    fun getData() {
         try {
+            isLoading(true)
             detailViewModel.getCharacterById("${intent.getStringExtra(CHARACTER_ID)}")
                 .enqueue(object : Callback<ResultsItem> {
                 override fun onResponse(
@@ -44,6 +46,7 @@ class DetailActivity : AppCompatActivity() {
                     response: Response<ResultsItem>,
                 ) {
                     if (response.isSuccessful) {
+                        isLoading(false)
                         val responseBody = response.body()
                         with(binding) {
                             tvProfileName.text = responseBody?.name
@@ -127,6 +130,14 @@ class DetailActivity : AppCompatActivity() {
                 )
             )
             binding.fabFavourite.setImageResource(R.drawable.baseline_favorite_border_24)
+        }
+    }
+
+    private fun isLoading(isLoading: Boolean) {
+        if (isLoading) {
+            binding.progressBar.visibility = View.VISIBLE
+        } else {
+            binding.progressBar.visibility = View.GONE
         }
     }
 

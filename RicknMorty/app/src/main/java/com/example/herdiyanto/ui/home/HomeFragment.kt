@@ -48,8 +48,9 @@ class HomeFragment : Fragment() {
         return root
     }
 
-    suspend fun getData(page: String) {
+    fun getData(page: String) {
         try {
+            isLoading(true)
             val getCharacter = homeViewModel.getCharacter(page)
             getCharacter.enqueue(object : Callback<CharactersResponse> {
                 override fun onResponse(
@@ -59,6 +60,10 @@ class HomeFragment : Fragment() {
                     if (response.isSuccessful) {
                         val responseBody = response.body()
                         setAdapter(responseBody?.results)
+                        isLoading(false)
+                    } else {
+                        binding.tvEmpty.visibility = View.VISIBLE
+                        isLoading(false)
                     }
                 }
 
@@ -89,11 +94,13 @@ class HomeFragment : Fragment() {
         })
     }
 
-//    private fun showClickedCharacter(data: ResultsItem) {
-//        Toast.makeText(context, "${data.id}", Toast.LENGTH_SHORT).show()
-////        val intent = Intent(context, DetailActivity::class.java)
-////        intent.putExtra(DetailActivity.CHARACTER_ID, data.id)
-//    }
+    private fun isLoading(isLoading: Boolean) {
+        if (isLoading) {
+            binding.progressBar.visibility = View.VISIBLE
+        } else {
+            binding.progressBar.visibility = View.GONE
+        }
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
