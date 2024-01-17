@@ -10,6 +10,16 @@ import com.example.ricknmorty.data.response.ResultsItem
 import com.example.ricknmorty.databinding.ItemCharactersBinding
 
 class CharacterAdapter : ListAdapter<ResultsItem, CharacterAdapter.ListViewHolder>(DIFF_CALLBACK) {
+    private lateinit var onItemClickCallback: OnItemClickCallback
+
+    interface OnItemClickCallback {
+        fun onItemClicked(data: ResultsItem)
+    }
+
+    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback
+    }
+
     class ListViewHolder(private val binding: ItemCharactersBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(dataList: ResultsItem) {
             with(binding) {
@@ -31,6 +41,10 @@ class CharacterAdapter : ListAdapter<ResultsItem, CharacterAdapter.ListViewHolde
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         val dataList = getItem(position)
         holder.bind(dataList)
+
+        holder.itemView.setOnClickListener {
+            onItemClickCallback.onItemClicked(dataList)
+        }
     }
 
     companion object {

@@ -2,12 +2,23 @@ package com.example.ricknmorty.data.repository
 
 import com.example.ricknmorty.data.api.ApiConfig
 import com.example.ricknmorty.data.response.CharactersResponse
+import com.example.ricknmorty.data.response.ResultsItem
 import retrofit2.Call
 
 class CharacterRepository {
     suspend fun getCharacter(page: String): Call<CharactersResponse> {
         val apiService = ApiConfig.getApiService()
         return apiService.getCharacters(page)
+    }
+
+    suspend fun getCharacterByName(page: String, name: String): Call<CharactersResponse> {
+        val apiService = ApiConfig.getApiService()
+        return apiService.getCharacterByName(page, name)
+    }
+
+    suspend fun getCharacterById(id: String): Call<ResultsItem> {
+        val apiService = ApiConfig.getApiService()
+        return apiService.getCharacterById(id)
     }
 
     companion object {
