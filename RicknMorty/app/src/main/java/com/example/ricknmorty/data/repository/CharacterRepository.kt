@@ -1,6 +1,5 @@
 package com.example.ricknmorty.data.repository
 
-import android.app.Application
 import android.content.Context
 import androidx.lifecycle.LiveData
 import com.example.ricknmorty.data.api.ApiConfig
@@ -21,17 +20,17 @@ class CharacterRepository(context: Context) {
         val db = FavouriteDatabase.getDatabase(context)
         favouriteDao = db.favouriteDao()
     }
-    suspend fun getCharacter(page: String): Call<CharactersResponse> {
+    fun getCharacter(page: String): Call<CharactersResponse> {
         val apiService = ApiConfig.getApiService()
         return apiService.getCharacters(page)
     }
 
-    suspend fun getCharacterByName(page: String, name: String): Call<CharactersResponse> {
+    fun getCharacterByName(page: String, name: String): Call<CharactersResponse> {
         val apiService = ApiConfig.getApiService()
         return apiService.getCharacterByName(page, name)
     }
 
-    suspend fun getCharacterById(id: String): Call<ResultsItem> {
+    fun getCharacterById(id: String): Call<ResultsItem> {
         val apiService = ApiConfig.getApiService()
         return apiService.getCharacterById(id)
     }

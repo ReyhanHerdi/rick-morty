@@ -61,6 +61,7 @@ class FavoritesFragment : Fragment() {
             override fun onItemClicked(data: Favourite) {
                 val intent = Intent(context, DetailActivity::class.java)
                 intent.putExtra(DetailActivity.CHARACTER_ID, data.id)
+
                 startActivity(intent)
             }
 

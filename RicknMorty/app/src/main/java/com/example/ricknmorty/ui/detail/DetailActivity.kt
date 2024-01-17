@@ -1,12 +1,10 @@
 package com.example.ricknmorty.ui.detail
 
-import android.content.res.Resources
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import androidx.activity.viewModels
-import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.viewModelScope
 import com.bumptech.glide.Glide
 import com.example.ricknmorty.R
@@ -113,6 +111,7 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun deleteFavourite(favourite: Favourite) {
         binding.fabFavourite.setOnClickListener {
             detailViewModel.deleteFavourite(

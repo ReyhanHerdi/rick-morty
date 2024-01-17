@@ -14,7 +14,7 @@ class SearchViewModel(private val repository: CharacterRepository) : ViewModel()
     }
     val text: LiveData<String> = _text
 
-    suspend fun getCharacterByName(page: String, name: String): Call<CharactersResponse> {
+    fun getCharacterByName(page: String, name: String): Call<CharactersResponse> {
         return repository.getCharacterByName(page, name)
     }
 }
